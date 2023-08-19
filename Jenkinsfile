@@ -31,6 +31,7 @@ pipeline{
 		    
 			withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerpassword')]) {
 			sh 'docker login -u amiyaranjansahoo -p ${dockerpassword}'
+			sh 'docker push amiyaranjansahoo/image1:v1'
 			}
 		}
 			
