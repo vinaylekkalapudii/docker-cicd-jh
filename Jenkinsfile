@@ -18,18 +18,18 @@ pipeline{
 			}
 		}
 		
-		stage('Deploy to tomcat'){
+		stage('Build the docker image'){
 		    
-			steps{
-				sshagent(['tomcat']) {
-					// some block
-					sh 'mv target/*.war target/myweb.war'
-					sh 'scp -o StrictHostKeyChecking=no target/myweb.war ec2-user@172.31.47.189:/home/ec2-user/tomcat/webapps'
-					sh 'ssh ec2-user@172.31.47.189 /home/ec2-user/tomcat/bin/shutdown.sh'
-					sh 'ssh ec2-user@172.31.47.189 /home/ec2-user/tomcat/bin/startup.sh'
-					
-				}
+			sh 'docker build -t amiyaranjansahoo/image1:v1'
+			
+		}
+		
+		stage('Login to Docker hub and upload'){
+		    
+			withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerpassword')]) {
+			sh 'docker login -u amiyaranjansahoo -p ${dockerpassword}'
 			}
+			
 		}
 	}
 }
