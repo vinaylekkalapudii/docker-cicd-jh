@@ -36,5 +36,16 @@ pipeline{
 		}
 			
 		}
+		
+		stage('Transfer to remote server'){
+		    
+			steps{
+				sshagent(['tomcat']) {
+	sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.47.189 docker container rm -f myweb' 
+    sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.47.189 docker run -itd -p 8080:8080 --name myweb amiyaranjansahoo/image1:v1 '
+}
+				
+			}
+		}
 	}
 }
