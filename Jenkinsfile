@@ -24,8 +24,8 @@ pipeline{
 					// some block
 					sh 'mv target/*.war target/myweb.war'
 					sh 'scp -o StrictHostKeyChecking=no target/myweb.war ec2-user@172.31.47.189:/home/ec2-user/tomcat/webapps'
-					sh 'ec2-user@172.31.47.189 /home/ec2-user/tomcat/bin/shutdown.sh'
-					sh 'ec2-user@172.31.47.189 /home/ec2-user/tomcat/bin/startup.sh'
+					sh 'ssh ec2-user@172.31.47.189 /home/ec2-user/tomcat/bin/shutdown.sh'
+					sh 'ssh ec2-user@172.31.47.189 /home/ec2-user/tomcat/bin/startup.sh'
 					
 				}
 			}
