@@ -2,12 +2,13 @@ pipeline{
 	agent any
 	
 	stages{
+		/*
 		stage('git clone'){
 			steps{
 				git credentialsId: 'git', url: 'https://github.com/amiyaranjansahoo/docker-cicd-jh.git'
 			}
 		}
-		
+		*/
 		stage('maven build'){
 		    tools {
              maven 'mvn3'
